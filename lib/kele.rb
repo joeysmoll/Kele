@@ -7,7 +7,6 @@ class Kele
         response = self.class.post(base_api_endpoint("sessions"), body: { "email": email, "password": password })
         @auth_token = response["auth_token"]
         raise InvalidStudentCodeError.new() if response.code == 401
-        
     end
     
     def get_me
@@ -15,9 +14,7 @@ class Kele
         @user_data = JSON.parse(response.body)
     end
 
-
     private
-    
     def base_api_endpoint(end_point)
         "https://www.bloc.io/api/v1/#{end_point}"
     end
