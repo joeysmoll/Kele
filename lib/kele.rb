@@ -1,8 +1,12 @@
 require "httparty"
 require 'json'
+require './lib/roadmap'
 
 class Kele
     include HTTParty
+    include JSON
+    include Roadmap
+    
     def initialize(email, password)
         response = self.class.post(base_api_endpoint("sessions"), body: { "email": email, "password": password })
         @auth_token = response["auth_token"]
