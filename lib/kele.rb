@@ -21,7 +21,6 @@ class Kele
         JSON.parse(json_body)
     end
 
-
     private
     def base_api_endpoint(end_point)
         "https://www.bloc.io/api/v1/#{end_point}"
