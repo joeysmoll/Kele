@@ -1,11 +1,13 @@
 require "httparty"
 require 'json'
 require './lib/roadmap'
+require './lib/messaging'
 
 class Kele
     include HTTParty
     include JSON
     include Roadmap
+    include Messaging
     
     def initialize(email, password)
         response = self.class.post(base_api_endpoint("sessions"), body: { "email": email, "password": password })
@@ -19,10 +21,8 @@ class Kele
     end
     
     def get_mentor_availability(mentor_id)
-        availability_uri = "/mentors/#{mentor_id}/student_availability"
-        response = self.class.get(base_api_endpoint(availability_uri), headers: { "authorization" => @auth_token})
-        json_body = response.body
-        JSON.parse(json_body)
+        response = self.class.get(base_api_endpoint("/mentors/#{mentor_id}/student_availability"), headers: { "authorization" => @auth_token})
+        @mentor_availability = JSON.parse(response.body)
     end
 
     private
