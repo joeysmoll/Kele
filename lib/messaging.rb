@@ -1,4 +1,5 @@
 module Messaging
+    
     def get_messages(*page)
         if page == []
             response = self.class.get(base_api_endpoint("/message_threads"), headers: { "authorization" => @auth_token })
