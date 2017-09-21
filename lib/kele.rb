@@ -2,12 +2,14 @@ require "httparty"
 require 'json'
 require './lib/roadmap'
 require './lib/messaging'
+require './lib/checkpoint'
 
 class Kele
     include HTTParty
     include JSON
     include Roadmap
     include Messaging
+    include Checkpoint
     
     def initialize(email, password)
         response = self.class.post(base_api_endpoint("sessions"), body: { "email": email, "password": password })
